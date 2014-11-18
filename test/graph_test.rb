@@ -5,7 +5,7 @@ class MockEdge
   def initialize(tail,head,weight)
     @head = head
     @tail = tail
-    @weight = weight
+    @weight = weight.to_i
   end
 end
 
@@ -39,7 +39,6 @@ describe Graph do
       tail,head,weight = edge_string.split(",")
       subject.add_edge MockEdge.new(tail,head,weight)
     end
-    binding.pry
   end
 
 end

@@ -3,6 +3,6 @@ class Edge
   def initialize(tail,head,weight)
     @tail = tail
     @head = head
-    @weight = weight
+    @weight = weight.to_i
   end
 end

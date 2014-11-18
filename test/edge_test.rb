@@ -8,7 +8,8 @@ describe Edge do
   it "has a head" do
     subject.head.must_be_instance_of Object
   end
-  it "has a weight" do
-    subject.weight.must_be_instance_of Object
+  it "has an integer weight" do
+    subject.weight.must_be_instance_of Fixnum
   end
+
 end

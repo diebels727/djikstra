@@ -9,8 +9,13 @@ class Graph
       @adjacency_list[tail] = (@adjacency_list[tail]||[]) << edge
       @adjacency_list[head] = @adjacency_list[head] || []
     end
+
     def vertices
       @adjacency_list.keys
+    end
+
+    def edges_at(vertex)
+      @adjacency_list[vertex]
     end
   end
 
@@ -28,6 +33,10 @@ class Graph
 
   def edges
     @edges
+  end
+
+  def edges_at(vertex)
+    @graph_representation.edges_at(vertex)
   end
 
   def add_edge(edge)
