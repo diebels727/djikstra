@@ -3,16 +3,9 @@ require "test_helper"
 class MockEdge
   attr_accessor :head,:tail,:weight
   def initialize(tail,head,weight)
-    @head = MockVertex.new head
-    @tail = MockVertex.new tail
+    @head = head
+    @tail = tail
     @weight = weight
-  end
-end
-
-class MockVertex
-  attr_accessor :id
-  def initialize(id)
-    @id = id
   end
 end
 

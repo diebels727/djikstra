@@ -6,10 +6,8 @@ class Graph
     def <<(edge)
       tail = edge.tail
       head = edge.head
-      tail_id = tail.id
-      head_id = head.id
-      @adjacency_list[tail_id] = (@adjacency_list[tail_id]||[]) << edge
-      @adjacency_list[head_id] = @adjacency_list[head_id] || []
+      @adjacency_list[tail] = (@adjacency_list[tail]||[]) << edge
+      @adjacency_list[head] = @adjacency_list[head] || []
     end
     def vertices
       @adjacency_list.keys
