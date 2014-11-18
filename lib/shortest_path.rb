@@ -16,7 +16,7 @@ class ShortestPath
     end.flatten.compact
   end
 
-  def calculate(start_vertex,end_vertex)
+  def calculate(start_vertex)
     min = {}
     @visited << start_vertex
     min[start_vertex] = 0
@@ -31,9 +31,11 @@ class ShortestPath
       edges = candidates.map do |candidate|
         current_weight = min[candidate.tail] + candidate.weight
         old_weight = min[candidate.head]
+        binding.pry
         if current_weight < old_weight
           min[candidate.head] = current_weight
         end
+        binding.pry
         @visited << candidate.head
       end
     end

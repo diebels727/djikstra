@@ -13,9 +13,8 @@ describe ShortestPath do
   subject {ShortestPath.new(graph)}
   let(:graph) {Graph.new}
   let(:edge_strings) {
-    %w{[A,B,1] [A,C,2] [B,C,3] [B,D,3]
-       [C,D,1] [B,E,2] [D,F,3] [D,E,3]
-       [E,G,3] [F,G,1]}
+    %w{[A,B,3] [A,C,5] [B,C,1]
+       [B,D,1] [C,D,50]}
   }
   it "calculates the shortest path" do
     edge_strings.each do |edge_string|
@@ -23,6 +22,7 @@ describe ShortestPath do
       tail,head,weight = edge_string.split(",")
       graph.add_edge MockEdge.new(tail,head,weight)
     end
+    subject.calculate("A")
     binding.pry
   end
 
