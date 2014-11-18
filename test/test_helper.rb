@@ -1,5 +1,7 @@
 require "djikstra"
 require "graph"
+require "vertex"
+require "edge"
 require "pry"
 require "minitest"
 require "minitest/unit"
