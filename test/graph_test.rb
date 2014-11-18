@@ -2,7 +2,7 @@ require "test_helper"
 
 class MockEdge
   attr_accessor :head,:tail,:weight
-  def initialize(head,tail,weight)
+  def initialize(tail,head,weight)
     @head = MockVertex.new head
     @tail = MockVertex.new tail
     @weight = weight
@@ -35,6 +35,18 @@ describe Graph do
     subject.add_edge(edge)
     subject.edges.size.must_be :==,1
     subject.vertices.size.must_be :==,2
+  end
+
+  it "represents a graph" do
+    edge_strings = %w{[A,B,1] [A,C,2] [B,C,3] [B,D,3]
+               [C,D,1] [B,E,2] [D,F,3] [D,E,3]
+               [E,G,3] [F,G,1]}
+    edge_strings.each do |edge_string|
+      edge_string.gsub!(/[\[\]]/,"")
+      tail,head,weight = edge_string.split(",")
+      subject.add_edge MockEdge.new(tail,head,weight)
+    end
+    binding.pry
   end
 
 end
