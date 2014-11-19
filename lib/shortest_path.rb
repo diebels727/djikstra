@@ -16,31 +16,44 @@ class ShortestPath
 
   def calculate(start_vertex)
     @min = {}
-    min_candidate = nil
     @visited << start_vertex
     @min[start_vertex] = 0
+    @path = {}
+    @path[start_vertex] = []
 
-    @frontier = @vertices - @visited
-    @frontier.each do |v|
-      @min[v] = Float::INFINITY
-    end
+    initialize_frontier(@min)
 
     while @visited != @vertices do
       @frontier = @vertices - @visited
 
-      min_weight = Float::INFINITY
+      min_candidate,min_cost = calculate_min(@min)
 
-      edges = candidates.each do |candidate|
-        current_weight = @min[candidate.tail] + candidate.weight
-        if current_weight < min_weight
-          min_candidate = candidate
-          min_weight = current_weight
-        end
-      end
-
-      @min[min_candidate.head] = min_weight
+      @min[min_candidate.head] = min_cost
+      @path[min_candidate.head] = (@path[min_candidate.tail].dup||[]) << min_candidate.head
       @visited << min_candidate.head
     end
+  end
+
+private
+
+  def initialize_frontier(min)
+    @frontier = @vertices - @visited
+    @frontier.each do |v|
+      @min[v] = Float::INFINITY
+    end
+  end
+
+  def calculate_min(min)
+    min_cost = Float::INFINITY
+    min_candidate = nil
+    candidates.each do |candidate|
+      current_cost = min[candidate.tail] + candidate.weight
+      if current_cost < min_cost
+        min_candidate = candidate
+        min_cost = current_cost
+      end
+    end
+    return min_candidate,min_cost
   end
 
 end
