@@ -14,7 +14,7 @@ describe ShortestPath do
   let(:graph) {Graph.new}
   let(:edge_strings) {
     %w{[A,B,3] [A,C,5] [B,C,1]
-       [B,D,1] [C,D,50]}
+       [B,D,2] [C,D,50]}
   }
   it "calculates the shortest path" do
     edge_strings.each do |edge_string|

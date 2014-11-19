@@ -5,39 +5,41 @@ class ShortestPath
     @graph = graph
     @visited = Set.new([])
     @vertices = Set.new(@graph.vertices)
+    @edges = @graph.edges
   end
 
   def candidates
-    @visited.map do |tail|
-      vertices = @graph.edges_at(tail)
-      vertices.map do |edge|
-        edge if @frontier.include?(edge.head)
-      end
-    end.flatten.compact
+    @edges.select { |edge|
+      @visited.include?(edge.tail) && !@visited.include?(edge.head)
+    }
   end
 
   def calculate(start_vertex)
-    min = {}
+    @min = {}
+    min_candidate = nil
     @visited << start_vertex
-    min[start_vertex] = 0
+    @min[start_vertex] = 0
 
     @frontier = @vertices - @visited
     @frontier.each do |v|
-      min[v] = Float::INFINITY
+      @min[v] = Float::INFINITY
     end
 
     while @visited != @vertices do
       @frontier = @vertices - @visited
-      edges = candidates.map do |candidate|
-        current_weight = min[candidate.tail] + candidate.weight
-        old_weight = min[candidate.head]
-        binding.pry
-        if current_weight < old_weight
-          min[candidate.head] = current_weight
+
+      min_weight = Float::INFINITY
+
+      edges = candidates.each do |candidate|
+        current_weight = @min[candidate.tail] + candidate.weight
+        if current_weight < min_weight
+          min_candidate = candidate
+          min_weight = current_weight
         end
-        binding.pry
-        @visited << candidate.head
       end
+
+      @min[min_candidate.head] = min_weight
+      @visited << min_candidate.head
     end
   end
 
