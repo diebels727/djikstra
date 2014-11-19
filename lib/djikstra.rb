@@ -27,7 +27,7 @@ module Djikstra
         exit 1
       end
 
-      graph = Graph.new
+      @graph = Graph.new
 
       File.open(file_name) do |fh|
         fh.each_line do |line|
@@ -35,14 +35,26 @@ module Djikstra
           line.gsub!(/[\[\]]/,"")
           tail,head,weight = line.split(",")
           edge = Edge.new tail,head,weight
-          graph.add_edge edge
+          @graph.add_edge edge
         end
       end
 
-      @spf = ShortestPath.new graph
+      @spf = ShortestPath.new @graph
     end
 
     def execute!
+      vertices = @graph.vertices
+
+      if !vertices.include?(@start_vertex)
+        puts "The vertex #{@start_vertex} is not in the graph."
+        exit 1
+      end
+
+      if !vertices.include?(@end_vertex)
+        puts "The vertex #{@end_vertex} is not in the graph."
+        exit 1
+      end
+
       @spf.calculate @start_vertex
       @spf.pretty_print @end_vertex
     end
