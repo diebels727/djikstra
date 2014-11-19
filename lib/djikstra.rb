@@ -43,6 +43,12 @@ module Djikstra
     def execute!
       vertices = @graph.vertices
 
+      if (@start_vertex == "") || (@end_vertex == "")
+        puts "Please specify a start and end vertex."
+        syntax
+        exit 1
+      end
+
       if !vertices.include?(@start_vertex)
         puts "The vertex #{@start_vertex} is not in the graph."
         exit 1
