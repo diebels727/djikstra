@@ -1,11 +1,13 @@
 require "test_helper"
 
-class MockEdge
-  attr_accessor :head,:tail,:weight
-  def initialize(tail,head,weight)
-    @head = head
-    @tail = tail
-    @weight = weight.to_i
+module GraphMocks
+  class Edge
+    attr_accessor :head,:tail,:weight
+    def initialize(tail,head,weight)
+      @head = head
+      @tail = tail
+      @weight = weight.to_i
+    end
   end
 end
 
@@ -24,7 +26,7 @@ describe Graph do
   end
 
   it "adds an edge" do
-    edge = MockEdge.new("A","B",1)
+    edge = GraphMocks::Edge.new("A","B",1)
     subject.add_edge(edge)
     subject.edges.size.must_be :==,1
     subject.vertices.size.must_be :==,2
@@ -37,7 +39,7 @@ describe Graph do
     edge_strings.each do |edge_string|
       edge_string.gsub!(/[\[\]]/,"")
       tail,head,weight = edge_string.split(",")
-      subject.add_edge MockEdge.new(tail,head,weight)
+      subject.add_edge GraphMocks::Edge.new(tail,head,weight)
     end
   end
 

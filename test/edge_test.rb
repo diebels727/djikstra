@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe Edge do
-  subject {Edge.new(Object.new,Object.new,Object.new)}
+  subject {Edge.new(Object.new,Object.new,0)}
   it "has a tail" do
     subject.tail.must_be_instance_of Object
   end

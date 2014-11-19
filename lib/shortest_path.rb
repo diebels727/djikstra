@@ -16,10 +16,11 @@ class ShortestPath
 
   def calculate(start_vertex)
     @min = {}
-    @visited << start_vertex
-    @min[start_vertex] = 0
+    @start_vertex = start_vertex
+    @visited << @start_vertex
+    @min[@start_vertex] = 0
     @path = {}
-    @path[start_vertex] = []
+    @path[@start_vertex] = []
 
     initialize_frontier(@min)
 
@@ -32,6 +33,14 @@ class ShortestPath
       @path[min_candidate.head] = (@path[min_candidate.tail].dup||[]) << min_candidate.head
       @visited << min_candidate.head
     end
+  end
+
+  def path(vertex)
+    [@start_vertex] + @path[vertex]
+  end
+
+  def cost(vertex)
+    @min[vertex]
   end
 
 private
