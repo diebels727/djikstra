@@ -3,8 +3,6 @@ require "graph"
 require "edge"
 require "shortest_path"
 
-require "pry"
-
 module Djikstra
   class Runner
     def syntax
