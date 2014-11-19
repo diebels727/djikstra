@@ -31,6 +31,14 @@ describe "Integration" do
        end
     graph
   }
+  let(:medium_graph) {
+    graph = Graph.new
+    %w{[A,B,2] [A,D,1] [B,D,3] [B,E,10] [C,A,4] [C,F,5]
+       [D,C,2] [D,E,2] [D,F,8] [D,G,4] [E,G,6] [G,F,1]}.each do |edge_string|
+         graph.add_edge IntegrationMocks::Edge.new(edge_string)
+       end
+    graph
+  }
 
   it "calculates the shortest path for a degenerate graph" do
     spf = ShortestPath.new degenerate_graph
@@ -44,6 +52,12 @@ describe "Integration" do
     spf.calculate("A")
     spf.cost("G").must_be :==,6
     spf.path("G").must_be :==,["A","B","E","G"]
+  end
+
+  it "calculates the shortest path for a medium graph" do
+    spf = ShortestPath.new medium_graph
+    spf.calculate("A")
+    spf.cost("G").must_be :==,5
   end
 
 end
