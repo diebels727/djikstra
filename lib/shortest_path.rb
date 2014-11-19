@@ -43,6 +43,13 @@ class ShortestPath
     @min[vertex]
   end
 
+  def pretty_print(vertex)
+    path_to_vertex = path(vertex).to_s
+    path_to_vertex.gsub!('"','')
+    path_to_vertex.gsub!(' ','')
+    puts "Shortest path is #{path_to_vertex} with total cost #{cost(vertex)}"
+  end
+
 private
 
   def initialize_frontier(min)
