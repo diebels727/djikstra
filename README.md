@@ -1,6 +1,20 @@
 # Djikstra
 
-TODO: Write a gem description
+A simple gem that implements a shortest path graph traversal algorithm for directed acyclic graphs.  Input graphs are formatted with each line as follows:
+
+```bash
+[start vertex,end vertex,weight]
+```
+
+For example, a file with the contents:
+
+```
+[A,B,1]
+[A,C,3]
+[B,C,2]
+```
+
+Represents a graph with three edges.
 
 ## Installation
 
@@ -18,12 +32,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```bash
+djikstra <file name> <start vertex> <end vertex>
+````
 
-## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/djikstra/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
